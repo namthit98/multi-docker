@@ -9,11 +9,11 @@ script:
   - docker run namthit98/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t namthit98/multi-client ./client
-  - docker build -t namthit98/multi-nginx ./nginx
-  - docker build -t namthit98/multi-server ./server
-  - docker build -t namthit98/multi-worker ./worker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t namthit98/multi-client:latest ./client
+  - docker build -t namthit98/multi-nginx:latest ./nginx
+  - docker build -t namthit98/multi-server:latest ./server
+  - docker build -t namthit98/multi-worker:latest ./worker
+  - echo "$DOCKER_PASSWORD" | docker login:latest -u "$DOCKER_ID" --password-stdin
   - docker push namthit98/multi-client
   - docker push namthit98/multi-nginx
   - docker push namthit98/multi-server
