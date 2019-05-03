@@ -3,18 +3,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t namthit98/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t namhandsome/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run namthit98/react-test npm test -- --coverage
+  - docker run namhandsome/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t namthit98/multi-client:latest ./client
-  - docker build -t namthit98/multi-nginx:latest ./nginx
-  - docker build -t namthit98/multi-server:latest ./server
-  - docker build -t namthit98/multi-worker:latest ./worker
+  - docker build -t namhandsome/multi-client:latest ./client
+  - docker build -t namhandsome/multi-nginx:latest ./nginx
+  - docker build -t namhandsome/multi-server:latest ./server
+  - docker build -t namhandsome/multi-worker:latest ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push namthit98/multi-client
-  - docker push namthit98/multi-nginx
-  - docker push namthit98/multi-server
-  - docker push namthit98/multi-worker
+  - docker push namhandsome/multi-client
+  - docker push namhandsome/multi-nginx
+  - docker push namhandsome/multi-server
+  - docker push namhandsome/multi-worker
