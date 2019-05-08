@@ -1,7 +1,14 @@
 sudo: required
 services:
 - docker
+addons:
+  ssh_known_hosts:
+  - 68.183.231.211
 before_install:
+- eval "$(ssh-agent -s)"
+- cp .travis/id_rsa ~/.ssh/id_rsa
+- chmod 600 ~/.ssh/id_rsa
+- ssh-add ~/.ssh/id_rsa
 - openssl aes-256-cbc -K $encrypted_3abe9649888d_key -iv $encrypted_3abe9649888d_iv
   -in id_rsa.enc -out ~\/.ssh/id_rsa -d
 - docker build -t namhandsome/react-test -f ./client/Dockerfile.dev ./client
