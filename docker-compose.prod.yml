@@ -7,7 +7,7 @@ services:
   nginx:
     restart: always
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./nginx
     ports:
       - '3050:80'
@@ -16,11 +16,8 @@ services:
       - api
   api:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./server
-    volumes:
-      - /app/node_modules
-      - ./server:/app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -34,20 +31,14 @@ services:
       - postgres
   client:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./client
-    volumes:
-      - /app/node_modules
-      - ./client:/app
   worker:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./worker
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-    volumes:
-      - /app/node_modules
-      - ./worker:/app
     depends_on:
       - redis
