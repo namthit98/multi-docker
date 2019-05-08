@@ -7,16 +7,6 @@ before_install:
 - docker build -t namhandsome/react-test -f ./client/Dockerfile.dev ./client
 script:
 - docker run namhandsome/react-test npm test -- --coverage
-after_success:
-- docker build -t namhandsome/multi-client:latest ./client
-- docker build -t namhandsome/multi-nginx:latest ./nginx
-- docker build -t namhandsome/multi-server:latest ./server
-- docker build -t namhandsome/multi-worker:latest ./worker
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-- docker push namhandsome/multi-client
-- docker push namhandsome/multi-nginx
-- docker push namhandsome/multi-server
-- docker push namhandsome/multi-worker
 deploy:
 - provider: script
   skip_cleanup: true
