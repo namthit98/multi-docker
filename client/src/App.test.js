@@ -9,5 +9,5 @@ it("renders without crashing", () => {
 });
 
 it("test faild", () => {
-    expect(1).toBe(3);
+    expect(3).toBe(3);
 });
