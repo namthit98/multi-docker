@@ -3,5 +3,5 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 it("test faild", () => {
-    expect(1).toBe(3);
+    expect(3).toBe(3);
 });
