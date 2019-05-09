@@ -9,8 +9,8 @@ git remote add deploy ssh://namthit98@$IP/$DEPLOY_DIR
 git push deploy master
 
 # Skip this command if you don't need to execute any additional commands after deploying.
-ssh -t namthit98@$IP <<EOF
+ssh namthit98@$IP <<EOF
   cd $DEPLOY_DIR
-  sudo docker-compose down
-  sudo docker-compose -f docker-compose.prod.yml up -d
+  docker-compose down
+  docker-compose -f docker-compose.prod.yml up -d
 EOF
