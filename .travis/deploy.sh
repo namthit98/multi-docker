@@ -12,5 +12,5 @@ git push deploy master
 ssh -T namthit98@$IP <<EOF
   cd $DEPLOY_DIR
   docker-compose down
-  docker-compose -f docker-compose.prod.yml up -d
+  docker-compose -f docker-compose.prod.yml up --build -d
 EOF
