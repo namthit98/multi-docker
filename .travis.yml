@@ -14,9 +14,5 @@ jobs:
         - docker build -t namhandsome/react-test -f ./client/Dockerfile.dev ./client
         - docker run namhandsome/react-test npm test -- --coverage
     - stage: deploy
-      deploy:
-      - provider: script
-        skip_cleanup: true
-        script: bash .travis/deploy.sh
-        on:
-          branch: master
+      script: .travis/deploy.sh
+      if: branch = master
