@@ -7,14 +7,12 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_d7e3b2d2a61d_key -iv $encrypted_d7e3b2d2a61d_iv
   -in .travis/id_rsa.enc -out .travis/id_rsa -d
-jobs:
-  include:
-    - stage: "Tests"
-      name: "Testing for client"
-      script:
-        - docker build -t namhandsome/react-test -f ./client/Dockerfile.dev ./client
-        - docker run namhandsome/react-test npm test -- --coverage
-    - stage: deploy
-      name: "Deploy to server"
-      script: .travis/deploy.sh
-      if: branch = master
+- docker build -t namhandsome/react-test -f ./client/Dockerfile.dev ./client
+script:
+- docker run namhandsome/react-test npm test -- --coverage
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: bash .travis/deploy.sh
+  on:
+    branch: master
