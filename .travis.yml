@@ -17,9 +17,13 @@ jobs:
     - script:
       - docker run namhandsome/react-test npm test -- --coverage
       name: "Testing for server"
-deploy:
-- provider: script
-  skip_cleanup: true
-  script: bash .travis/deploy.sh
-  on:
-    branch: master
+    - stage: deploy
+      name: "Deploy to server"
+      script: skip
+      deploy:
+      - provider: script
+        skip_cleanup: true
+        script: bash .travis/deploy.sh
+        on:
+          branch: master
+      if: branch = master
